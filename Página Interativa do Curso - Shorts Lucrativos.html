@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Shorts Lucrativos: O Método Herói-Interativo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Tech (Light Slate, Deep Blue Accent, Gray Text) -->
+    <!-- Application Structure Plan: A single-page, scroll-based layout presenting the course structure. Key features include a sticky navigation bar for module jumping and collapsible accordion sections for each module to ensure a clean, focused user experience. This linear-first approach with non-linear access mirrors how a student would explore a curriculum, making it intuitive. -->
+    <!-- Visualization & Content Choices: Pillars -> Interactive cards (HTML/CSS/JS) for focused learning. Workflow -> Numbered step-by-step visual diagram (HTML/CSS) to simplify the process. Metrics -> Illustrative line chart (Chart.js/Canvas) to visually anchor the concept. Monetization -> Thematic cards (HTML/CSS) for clear strategy separation. All choices prioritize clarity and engagement over data complexity, as the source is a curriculum, not a dataset. NO SVG/Mermaid used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .pillar-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .pillar-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .module-content {
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            overflow: hidden;
+        }
+        .module-content.hidden {
+            max-height: 0;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold text-slate-900">Shorts Lucrativos</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#pilares" class="text-slate-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Os 5 Pilares</a>
+                        <a href="#mentalidade" class="text-slate-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Mentalidade</a>
+                        <a href="#fluxo" class="text-slate-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Fluxo de Trabalho</a>
+                        <a href="#monetizacao" class="text-slate-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Monetização</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-slate-500 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                        <span class="sr-only">Abrir menu principal</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="md:hidden hidden">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <a href="#pilares" class="text-slate-600 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Os 5 Pilares</a>
+                    <a href="#mentalidade" class="text-slate-600 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Mentalidade</a>
+                    <a href="#fluxo" class="text-slate-600 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Fluxo de Trabalho</a>
+                    <a href="#monetizacao" class="text-slate-600 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Monetização</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <section id="hero" class="text-center py-16">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight">
+                <span class="block">Domine o YouTube com o</span>
+                <span class="block text-blue-600">Método Herói-Interativo</span>
+            </h1>
+            <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-slate-600">
+                Aprenda o passo a passo para criar e monetizar um canal usando apenas Shorts e Inteligência Artificial, mesmo que você não queira aparecer ou não tenha experiência.
+            </p>
+            <div class="mt-8">
+                <a href="#fluxo" class="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-blue-700 transition-colors">Veja o Método na Prática</a>
+            </div>
+        </section>
+
+        <section id="pilares" class="py-16">
+            <div class="text-center">
+                <h2 class="text-base font-semibold text-blue-600 tracking-wider uppercase">Módulo 0</h2>
+                <p class="mt-2 text-3xl font-extrabold text-slate-900 tracking-tight sm:text-4xl">A Base de Tudo: Os 5 Pilares do Sucesso</p>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-500">Estes são os fundamentos que sustentam todo o método, garantindo que cada Short seja magnético e estratégico.</p>
+            </div>
+            <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div class="pillar-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-md bg-blue-500 text-white flex items-center justify-center text-xl font-bold">1</div>
+                        <h3 class="ml-4 text-xl font-bold text-slate-900">Domínio dos Shorts</h3>
+                    </div>
+                    <p class="mt-4 text-slate-600">Foco total no formato que mais cresce. Shorts são a via expressa para retenção máxima, alcance massivo e ganho rápido de inscritos.</p>
+                </div>
+                <div class="pillar-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-md bg-blue-500 text-white flex items-center justify-center text-xl font-bold">2</div>
+                        <h3 class="ml-4 text-xl font-bold text-slate-900">Jornada do Herói</h3>
+                    </div>
+                    <p class="mt-4 text-slate-600">Use a estrutura de storytelling mais poderosa do mundo, adaptada para 60 segundos, para criar uma conexão emocional imediata com a audiência.</p>
+                </div>
+                <div class="pillar-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-md bg-blue-500 text-white flex items-center justify-center text-xl font-bold">3</div>
+                        <h3 class="ml-4 text-xl font-bold text-slate-900">Personagens Conhecidos</h3>
+                    </div>
+                    <p class="mt-4 text-slate-600">Utilize heróis de animes, filmes e séries para criar um atalho emocional, fazendo o público torcer e se engajar instantaneamente.</p>
+                </div>
+                <div class="pillar-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-md bg-blue-500 text-white flex items-center justify-center text-xl font-bold">4</div>
+                        <h3 class="ml-4 text-xl font-bold text-slate-900">Diálogos Diretos</h3>
+                    </div>
+                    <p class="mt-4 text-slate-600">Sem narração. Apenas conversas dinâmicas entre os personagens, como uma novela animada, que prendem a atenção do início ao fim.</p>
+                </div>
+                <div class="pillar-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-md bg-blue-500 text-white flex items-center justify-center text-xl font-bold">5</div>
+                        <h3 class="ml-4 text-xl font-bold text-slate-900">Interação Estratégica</h3>
+                    </div>
+                    <p class="mt-4 text-slate-600">O CTA (like, inscrição) não é um simples pedido: é a força que o herói precisa para vencer, transformando o espectador em parte da história.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="space-y-10">
+            <section id="mentalidade" class="p-8 bg-white rounded-2xl shadow-lg">
+                <button class="module-toggle w-full flex justify-between items-center text-left">
+                    <div>
+                        <h2 class="text-base font-semibold text-blue-600 tracking-wider uppercase">Módulo 1</h2>
+                        <p class="mt-1 text-2xl font-bold text-slate-900">A Mentalidade do Criador-Empresário</p>
+                    </div>
+                    <span class="transform transition-transform duration-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </span>
+                </button>
+                <div class="module-content mt-6 text-slate-600 space-y-4 hidden">
+                    <p><strong>Construindo seu Ativo Digital:</strong> Mudança de chave: você não está criando vídeos, está construindo um negócio. A diferença entre ser um freelancer e ser dono de uma marca que gera valor a longo prazo.</p>
+                    <p><strong>Paciência, Consistência e a Realidade do Mercado:</strong> Preparação mental para a jornada, entendendo que a consistência é o que separa os 9% que têm sucesso do resto.</p>
+                </div>
+            </section>
+
+            <section id="fluxo" class="p-8 bg-white rounded-2xl shadow-lg">
+                <button class="module-toggle w-full flex justify-between items-center text-left">
+                     <div>
+                        <h2 class="text-base font-semibold text-blue-600 tracking-wider uppercase">Módulo 2</h2>
+                        <p class="mt-1 text-2xl font-bold text-slate-900">Fluxo de Trabalho Prático: Sua Fábrica de Shorts</p>
+                    </div>
+                    <span class="transform transition-transform duration-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </span>
+                </button>
+                <div class="module-content mt-6 text-slate-600 hidden">
+                    <p class="mb-8">Este módulo é 100% prático. Você vai aprender o fluxo de trabalho exato, do roteiro à publicação, para criar Shorts de alta qualidade de forma consistente.</p>
+                    <div class="relative">
+                        <div class="absolute left-4 md:left-1/2 top-0 h-full w-0.5 bg-slate-200" aria-hidden="true"></div>
+                        <div class="space-y-8">
+                            <div class="flex items-start md:space-x-8">
+                                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold z-10">1</div>
+                                <div class="flex-1 bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                    <h4 class="font-bold text-slate-800">Roteiro e Otimização com IA</h4>
+                                    <p class="mt-1">Criação do roteiro no Bloco de Notas e otimização instantânea de título e descrição com um único comando de IA.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start md:space-x-8">
+                                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold z-10">2</div>
+                                <div class="flex-1 bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                    <h4 class="font-bold text-slate-800">Produção de Áudio e Base da Edição</h4>
+                                    <p class="mt-1">Geração de vozes com IA e montagem da "espinha dorsal" do vídeo com áudios, músicas e legendas.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start md:space-x-8">
+                                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold z-10">3</div>
+                                <div class="flex-1 bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                    <h4 class="font-bold text-slate-800">Criação das Imagens com IA</h4>
+                                    <p class="mt-1">Uso do ImageFX para gerar todas as imagens da cena, a partir de prompts inteligentes criados pela própria IA.</p>
+                                </div>
+                            </div>
+                             <div class="flex items-start md:space-x-8">
+                                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold z-10">4</div>
+                                <div class="flex-1 bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                    <h4 class="font-bold text-slate-800">Montagem Final e Publicação</h4>
+                                    <p class="mt-1">Sincronização das imagens com a história e publicação do vídeo finalizado no YouTube.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="metricas" class="p-8 bg-white rounded-2xl shadow-lg">
+                <button class="module-toggle w-full flex justify-between items-center text-left">
+                    <div>
+                        <h2 class="text-base font-semibold text-blue-600 tracking-wider uppercase">Módulo 3</h2>
+                        <p class="mt-1 text-2xl font-bold text-slate-900">Entendendo e Dominando o Jogo</p>
+                    </div>
+                    <span class="transform transition-transform duration-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </span>
+                </button>
+                <div class="module-content mt-6 text-slate-600 hidden">
+                    <p class="mb-6">Aprenda a ler os dados do YouTube Studio para tomar decisões inteligentes e otimizar seu crescimento. Entender as métricas é o que separa os amadores dos profissionais.</p>
+                    <div class="chart-container relative w-full max-w-2xl mx-auto h-64 md:h-80">
+                        <canvas id="metricsChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section id="monetizacao" class="p-8 bg-white rounded-2xl shadow-lg">
+                <button class="module-toggle w-full flex justify-between items-center text-left">
+                    <div>
+                        <h2 class="text-base font-semibold text-blue-600 tracking-wider uppercase">Módulo 4</h2>
+                        <p class="mt-1 text-2xl font-bold text-slate-900">Monetização Avançada: Transformando Views em R$</p>
+                    </div>
+                    <span class="transform transition-transform duration-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </span>
+                </button>
+                <div class="module-content mt-6 text-slate-600 hidden">
+                    <p class="mb-8">Descubra estratégias práticas e avançadas para monetizar sua audiência muito além do AdSense do YouTube.</p>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                            <h4 class="font-bold text-slate-800">Estratégia 1: Ganhando com Afiliados</h4>
+                            <p class="mt-2">Aprenda a se afiliar a produtos e a usar sua vitrine de links gratuita (criada com Netlify) para direcionar vendas, mesmo sem links diretos nos Shorts.</p>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                            <h4 class="font-bold text-slate-800">Estratégia 2: Parcerias e Patrocínios</h4>
+                            <p class="mt-2">Como criar um mídia kit profissional e abordar marcas para fechar parcerias pagas, transformando seu canal em uma fonte de renda direta.</p>
+                        </div>
+                        <div class="bg-blue-50 p-6 rounded-lg border border-blue-200 md:col-span-2">
+                            <h4 class="font-bold text-blue-800">Visão de Futuro: O Mercado de Infoprodutos</h4>
+                            <p class="mt-2 text-blue-700">O objetivo final: usar a autoridade do seu canal para criar e vender seus próprios produtos digitais (cursos, e-books), capitalizando no bilionário mercado de infoprodutos do Brasil.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="bg-slate-900 text-white mt-20">
+        <div class="container mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2025 Shorts Lucrativos. Todos os direitos reservados.</p>
+            <p class="text-sm text-slate-400 mt-2">Transforme sua paixão em um negócio de sucesso.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const moduleToggles = document.querySelectorAll('.module-toggle');
+            moduleToggles.forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    const content = toggle.nextElementSibling;
+                    const icon = toggle.querySelector('svg');
+                    
+                    if (content.classList.contains('hidden')) {
+                        content.classList.remove('hidden');
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        content.style.opacity = 1;
+                        icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        content.style.maxHeight = '0';
+                        content.style.opacity = 0;
+                        icon.style.transform = 'rotate(0deg)';
+                        setTimeout(() => {
+                           content.classList.add('hidden');
+                        }, 500);
+                    }
+                });
+            });
+
+            const ctx = document.getElementById('metricsChart');
+            if (ctx) {
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                        datasets: [{
+                            label: 'Visualizações (Milhares)',
+                            data: [12, 19, 30, 50, 82, 123],
+                            borderColor: 'rgb(59, 130, 246)',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: true,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false,
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
